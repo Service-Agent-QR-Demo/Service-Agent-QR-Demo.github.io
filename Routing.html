@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Company Redirect</title>
+</head>
+<body>
+  <script>
+    // Function to get URL parameters
+    function getUrlParams() {
+      const params = {};
+      const queryString = window.location.search.substring(1);
+      const regex = /([^&=]+)=([^&]*)/g;
+      let m;
+      while (m = regex.exec(queryString)) {
+        params[decodeURIComponent(m[1])] = decodeURIComponent(m[2]);
+      }
+      return params;
+    }
+
+    // Function to build the final URL
+    function buildUrl(baseUrl, params) {
+      const url = new URL(baseUrl);
+      for (const [key, value] of Object.entries(params)) {
+        if (key !== 'company') {
+          url.searchParams.append(key, value);
+        }
+      }
+      return url.toString();
+    }
+
+    // Map "company" parameter to corresponding link
+    const companyLinks = {
+      'kenloch_demo': 'https://demo.liveforms.online/web/form/view?id=201',
+      // Add more mappings as needed
+    };
+
+    // Get URL parameters
+    const params = getUrlParams();
+    const company = params['company'];
+
+    // Check if the company parameter exists in the mapping
+    if (company in companyLinks) {
+      const baseUrl = companyLinks[company];
+      const finalUrl = buildUrl(baseUrl, params);
+      // Redirect to the final URL
+      window.location.href = finalUrl;
+    } else {
+      // Handle case where company parameter is not in the mapping
+      console.error('Company not found in mapping');
+      // Optionally, you can redirect to a default page or show an error message
+    }
+  </script>
+</body>
+</html>
