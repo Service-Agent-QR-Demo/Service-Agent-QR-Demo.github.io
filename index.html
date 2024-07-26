@@ -32,7 +32,12 @@
 
     // Map "company" parameter to corresponding link
     const companyLinks = {
-      'kenloch_demo': 'https://demo.liveforms.online/web/form/view?id=212',
+      /*examples (be aware of reformatting on paste)
+      https://service-agent-qr-demo.github.io/?company=kenloch_demo
+      https://service-agent-qr-demo.github.io/?company=kenloch_demo&data=(CustomerName:Gaddy)
+      */
+      
+      'kenloch_demo': 'https://demo.liveforms.online/web/form/view?id=212', 
       // Add more mappings as needed
     };
 
@@ -49,7 +54,6 @@
     } else {
       // Handle case where company parameter is not in the mapping
       console.error('Company not found in mapping');
-      // Optionally, you can redirect to a default page or show an error message
     }
   </script>
 </body>
